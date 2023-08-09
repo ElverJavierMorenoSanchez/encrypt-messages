@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usePostLoginMutation, usePostSignupMutation } from "@/state/api";
+import { usePostLoginMutation, usePostSignupMutation } from "../../state/api";
 
 const Login = ({ setUser, setSecret }) => {
   const [isRegister, setIsRegister] = useState(false);
@@ -28,6 +28,8 @@ const Login = ({ setUser, setSecret }) => {
       setUser(resulLogin.data?.response.username);
       setSecret(password);
     }
+
+    console.log(process.env);
   }, [resulLogin.data]); //eslint-disable-line
 
   return (

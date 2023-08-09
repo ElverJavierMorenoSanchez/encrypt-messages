@@ -47,7 +47,7 @@ const Attachments = ({ attachments, text, band }) => {
     const _secret = prompt("Introduce la clave");
 
     window.open(
-      `${import.meta.env.VITE_BASE_URL}/uploads/decrypt/${text}/${_secret}`,
+      `${process.env.REACT_APP_API_ULR}/uploads/decrypt/${text}/${_secret}`,
       "_blank"
     );
   };
@@ -107,7 +107,7 @@ const Attachments = ({ attachments, text, band }) => {
         href={
           text === ""
             ? attachments[0].file
-            : `${import.meta.env.VITE_BASE_URL}/uploads/${text}`
+            : `${process.env.REACT_APP_API_ULR}/uploads/${text}`
         }
         className="bubble-message_attachments"
         target="_blank"

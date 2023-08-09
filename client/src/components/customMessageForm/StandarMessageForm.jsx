@@ -33,7 +33,7 @@ const StandarMessageForm = ({ props, activeChat }) => {
       formData.append("secret", secret);
 
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/uploads/encrypt`,
+        `${process.env.REACT_APP_API_ULR}/uploads/encrypt`,
         formData
       );
 
