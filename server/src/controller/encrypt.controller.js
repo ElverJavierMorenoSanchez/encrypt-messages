@@ -42,22 +42,22 @@ export const dencryptFile = async (req, res) => {
     console.log(newName);
 
     setTimeout(() => {
-      fs.readFile(`./uploads/${filename}`, (err, file) => {
+      fs.readFile(`uploads/${filename}`, (err, file) => {
         if (err) return console.log(err);
 
         const decryptedFile = decrypt(file, _secret);
-        fs.writeFile(`./uploads/${newName}`, decryptedFile, (error, _file) => {
+        fs.writeFile(`uploads/${newName}`, decryptedFile, (error, _file) => {
           if (error)
             return res
               .status(404)
               .json({ message: "Error al desencriptar el archivo" });
 
-          const file = path.resolve(`./uploads/${newName}`);
+          const file = path.resolve(`uploads/${newName}`);
 
           res.status(200).download(file);
 
           setTimeout(() => {
-            fs.unlinkSync(`./uploads/${newName}`, (error) => {
+            fs.unlinkSync(`uploads/${newName}`, (error) => {
               console.log(error.message);
             });
           });
@@ -71,7 +71,7 @@ export const dencryptFile = async (req, res) => {
 
 export const getFile = async (req, res) => {
   const { filename } = req.params;
-  const file = path.resolve(`./uploads/${filename}`);
+  const file = path.resolve(`uploads/${filename}`);
   res.download(file);
 };
 
@@ -88,22 +88,22 @@ export const encryptFile = async (req, res) => {
     .substring(0, 32);
 
   try {
-    EDFile.mv(`./uploads/${EDFile.name}`, (err) => {
+    EDFile.mv(`uploads/${EDFile.name}`, (err) => {
       if (err) return res.status(500).send({ message: err });
     });
 
     setTimeout(() => {
-      fs.readFile(`./uploads/${EDFile.name}`, (err, file) => {
+      fs.readFile(`uploads/${EDFile.name}`, (err, file) => {
         if (err) return console.log(err);
 
         const encryptedFile = encrypt(file, _secret);
 
         fs.writeFile(
-          `./uploads/encriptado-${EDFile.name}`,
+          `uploads/encriptado-${EDFile.name}`,
           encryptedFile,
           (error, _) => {
             setTimeout(() => {
-              fs.unlinkSync(`./uploads/${EDFile.name}`, (error) => {
+              fs.unlinkSync(`uploads/${EDFile.name}`, (error) => {
                 console.log(error.message);
               });
             });
