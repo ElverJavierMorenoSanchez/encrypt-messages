@@ -39,8 +39,6 @@ export const dencryptFile = async (req, res) => {
   try {
     const newName = `desencriptado-${filename.substring(11, filename.length)}`;
 
-    console.log(newName);
-
     setTimeout(() => {
       fs.readFile(`uploads/${filename}`, (err, file) => {
         if (err) return console.log(err);
@@ -90,11 +88,7 @@ export const encryptFile = async (req, res) => {
   try {
     EDFile.mv(`uploads/${EDFile.name}`, (err) => {
       if (err) return res.status(500).send({ message: err });
-    });
 
-    console.log("no llega");
-
-    setTimeout(() => {
       fs.readFile(`uploads/${EDFile.name}`, (err, file) => {
         if (err) return console.log(err);
 
@@ -104,10 +98,8 @@ export const encryptFile = async (req, res) => {
           `uploads/encriptado-${EDFile.name}`,
           encryptedFile,
           (error, _) => {
-            setTimeout(() => {
-              fs.unlinkSync(`uploads/${EDFile.name}`, (error) => {
-                console.log(error.message);
-              });
+            fs.unlinkSync(`uploads/${EDFile.name}`, (error) => {
+              console.log(error.message);
             });
 
             if (error)
@@ -119,7 +111,7 @@ export const encryptFile = async (req, res) => {
           }
         );
       });
-    }, 5000);
+    });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
