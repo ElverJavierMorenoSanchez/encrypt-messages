@@ -19,8 +19,9 @@ const Login = ({ setUser, setSecret }) => {
       username,
       password,
       name,
-      email,
     });
+
+    handleLogin();
   };
 
   useEffect(() => {
@@ -28,8 +29,6 @@ const Login = ({ setUser, setSecret }) => {
       setUser(resulLogin.data?.response.username);
       setSecret(password);
     }
-
-    console.log(process.env);
   }, [resulLogin.data]); //eslint-disable-line
 
   return (
@@ -118,7 +117,7 @@ const Login = ({ setUser, setSecret }) => {
               {isRegister && (
                 <div className="inputBox">
                   <input
-                    type="text"
+                    type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

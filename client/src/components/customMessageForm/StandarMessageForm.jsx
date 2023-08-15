@@ -38,7 +38,7 @@ const StandarMessageForm = ({ props, activeChat }) => {
       );
 
       const attachments = attachment
-        ? [{ blob: attachment, file: `${attachment.name}` }]
+        ? [{ blob: new Blob(), file: `archivo` }]
         : [];
 
       const form = {
