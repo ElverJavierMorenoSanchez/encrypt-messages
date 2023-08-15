@@ -92,6 +92,8 @@ export const encryptFile = async (req, res) => {
       if (err) return res.status(500).send({ message: err });
     });
 
+    console.log("no llega");
+
     setTimeout(() => {
       fs.readFile(`uploads/${EDFile.name}`, (err, file) => {
         if (err) return console.log(err);
@@ -117,7 +119,7 @@ export const encryptFile = async (req, res) => {
           }
         );
       });
-    }, 3000);
+    }, 5000);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
